@@ -1,40 +1,38 @@
 class Station
-  attr_accessor :list_of_trains
-  attr_accessor :station_name
+  attr_accessor :trains
+  attr_accessor :name
 
-  def initialize (station_name)
-    @station_name = station_name
-    @list_of_trains = []
+  def initialize (name)
+    @name = name
+    @trains = []
   end
 
   def reception_trains(train)
-    @list_of_trains.push(train)
-  end 
+    @trains.push(train)
+  end
 
   def puts_trains(train)
-    @list_of_trains.delete(train)
+    @trains.delete(train)
   end
 
 
   def print_list_trains
-    puts "На станции #{self.station_name} находятся поезда:"
-    @list_of_trains.each_with_index {|train, index|
-    puts "Поезд #{(index +1)} #{train.name_train}"
+    puts "На станции #{self.name} находятся поезда:"
+    @trains.each_with_index {|train, index|
+    puts "Поезд #{(index +1)} #{train.name}"
     }
   end
 
-  def trains_of_type (type_train)
+  def trains_of_type (type)
     i=0
-    puts "Список поездов по типу #{type_train}:"
-    @list_of_trains.each_with_index {|train, index|
-      if train.type_train == type_train
+    puts "Список поездов по типу #{type}:"
+    @trains.each_with_index {|train, index|
+      if train.type == type
         i+=1
-        puts " Поезд #{(index +1)} #{train.name_train}"
+        puts " Поезд #{(index +1)} #{train.name}"
       end
       }
-    puts "Количество поездов #{type_train} = #{i}"
+    puts "Количество поездов #{type} = #{i}"
   end
 
 end
-
-
