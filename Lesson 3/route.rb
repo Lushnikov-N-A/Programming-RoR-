@@ -1,5 +1,5 @@
 class Route
-  
+
   attr_accessor :stations
 
   def initialize(first_station, last_station)
@@ -17,11 +17,9 @@ class Route
 
   def print_list_station
     puts "Список станций:"
-    @stations.each_with_index {|station, index|
-    puts "Станция #{(index +1)} #{station}"
-    }
+    @stations.each_with_index do |station, index|
+      puts "Станция #{(index +1)} #{station}"
+    end
   end
 
 end
-
-

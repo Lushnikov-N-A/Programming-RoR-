@@ -18,20 +18,20 @@ class Station
 
   def print_list_trains
     puts "На станции #{self.name} находятся поезда:"
-    @trains.each_with_index {|train, index|
-    puts "Поезд #{(index +1)} #{train.name}"
-    }
+    @trains.each_with_index do |train, index|
+        puts "Поезд #{(index +1)} #{train.name}"
+    end
   end
 
   def trains_of_type (type)
     i=0
     puts "Список поездов по типу #{type}:"
-    @trains.each_with_index {|train, index|
+    @trains.each_with_index do |train, index|
       if train.type == type
         i+=1
         puts " Поезд #{(index +1)} #{train.name}"
       end
-      }
+    end
     puts "Количество поездов #{type} = #{i}"
   end
 
