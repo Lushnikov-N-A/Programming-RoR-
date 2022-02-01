@@ -36,12 +36,14 @@ class Train
     puts "Количество вагонов у поезда #{@name}  = #{@vagons}"
   end
 
+=begin
   def print_list_station
     puts "Список станций:"
     @stations.each_with_index {|station, index|
     puts "Станция #{(index +1)} #{station}"
     }
   end
+=end
 
   def put_route(route)
     @route = route
@@ -49,7 +51,6 @@ class Train
     @route.stations[@current_station_index].reception_trains(self)
 
   end
-
 
   def train_go(n)
     case
