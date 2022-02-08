@@ -4,16 +4,16 @@ class Station
   attr_accessor :name
   attr_accessor :reception_trains
 
-  @@obj = []
+  @@stations = []
 
   def self.all
-    @@obj
+    @@stations
   end
 
   def initialize (name)
     @name = name
     @trains = []
-    @@obj.push(self)
+    @@stations.push(self)
     register_instance
   end
 

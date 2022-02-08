@@ -5,7 +5,6 @@ class Route
 
   def initialize(first_station, last_station)
     @stations = [first_station, last_station]
-    @name=""
     register_instance
   end
 

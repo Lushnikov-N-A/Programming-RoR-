@@ -1,39 +1,34 @@
 class Train
   include Manufacturer, InstanceCounter
   attr_accessor :name
+  attr_accessor :number
   attr_accessor :type
   attr_accessor :route
   attr_accessor :vagons
   attr_reader :current_speed
   attr_reader :current_station_index
 
-  @@obj = []
+  @@trains = []
 
-  def self.find
-    @name_for_search = gets.chomp.to_s
-    @@obj.each_with_index do |name, index|
-      if name.name == @name_for_search
-        name.name
-      else
-        return nil
-      end
-    end
+  def self.find(number)
+    @@trains.find {|train| train.number == number}
   end
 
-  def initialize (name)
+  def initialize (name, number)
     @name = name
+    @number = number
     @type
     @vagons = []
     @current_speed = 0
-    @@obj.push(self)
+    @@trains.push(self)
     register_instance
   end
 
-#Public, т.к. вызываются "из другого объекта".
+  #Public, т.к. вызываются "из другого объекта".
   def push_vagon(vagon)
     if train_stopped? && check_vagon(vagon)
       self.vagons.push(vagon)
-  end
+    end
   end
 
   def delete_vagon
@@ -61,7 +56,7 @@ class Train
     end
   end
 
-  def train_station
+  def stations_information
     puts "Поезд #{self.name} находится на станции #{@route.stations[@current_station_index].name}"
     @current_station_index += 1
     puts "Следующей станцией поезда #{self.name} является #{@route.stations[@current_station_index].name}"
@@ -76,6 +71,7 @@ class Train
   def stop
     @current_speed = 0
   end
+
   def check_vagon(vagon)
     if vagon.type == self.type
       true

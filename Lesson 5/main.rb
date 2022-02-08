@@ -27,7 +27,9 @@ end
 def train_create(type)
   puts "Введите название поезда:"
   name = gets.chomp.to_s
-  tr = Train.new(name)
+  puts "Введите номер поезда:"
+  number = gets.chomp.to_s
+  tr = Train.new(name, number)
   @type = type
   tr.type = @type
   @trains.push(tr)
@@ -144,7 +146,7 @@ def information_route
   puts "Введите имя поезда для вывода информации о маршруте:"
   @name_for_search = gets.chomp.to_s
   train = search_obj(@trains)
-  @trains[train].train_station
+  @trains[train].stations_information
 end
 
 def information_trains_station
