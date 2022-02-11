@@ -30,8 +30,7 @@ def train_create(type)
     number = gets.chomp.to_s
     tr = Train.new(name, number)
     tr.valid?
-  rescue RuntimeError => e
-    puts e.message
+  rescue
     puts "Повторите ввод данных!"
     retry
   end

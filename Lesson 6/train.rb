@@ -8,9 +8,10 @@ class Train
   attr_reader :current_speed
   attr_reader :current_station_index
   attr_accessor :route_list
+  attr_accessor :errors
 
   NAME_FORMAT = /[a-z0-9]/i
-  NUMBER_FORMAT = /^[a-z0-9]{3}-?[a-z0-9]?{2}$/i
+  NUMBER_FORMAT = /[a-z0-9]{3}-?[a-z0-9]{2}/i
 
   @@trains = []
 
@@ -111,8 +112,19 @@ class Train
   protected
 
   def validate!
-    raise "Имя поезда не может быть короче трех символов!" if @name.length < 3
-    raise "Имя поезда не должно содержать ничего кроме букв и цифр!" if @name !~ NAME_FORMAT
-    raise "Номер поезда не совпадает с форматом! Формат номера поезда:три буквы или цифры в любом порядке, необязательный дефис 2 буквы или цифры после дефиса." if @name !~ NUMBER_FORMAT
+    @errors = []
+    if @name.length < 3
+      @errors << "Имя поезда не может быть короче трех символов!"
+    end
+    if @name !~ NAME_FORMAT
+      @errors << "Имя поезда не должно содержать ничего кроме букв и цифр!"
+    end
+    if @number !~ NUMBER_FORMAT
+      @errors << "Номер поезда не совпадает с форматом! Формат номера поезда: три буквы или цифры в любом порядке, необязательный дефис 2 буквы или цифры после дефиса."
+    end
+    unless @errors.empty?
+      puts @errors
+      raise @errors.join("|")
+    end
   end
 end
