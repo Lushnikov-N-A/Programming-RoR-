@@ -60,7 +60,7 @@ class Station
   end
 
   def show_trains(&block)
-    @trains.each {|train| yield(train)}
+    @trains.each {|each_train| yield(each_train)}
   end
 
   protected

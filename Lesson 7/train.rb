@@ -111,7 +111,7 @@ class Train
   end
 
   def all_vagons (&block)
-    @vagons.each {|vagon| yield(vagon)}
+    @vagons.each {|each_vagon| yield(each_vagon)}
   end
 
   protected

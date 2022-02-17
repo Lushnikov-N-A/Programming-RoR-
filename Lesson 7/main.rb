@@ -235,7 +235,7 @@ def train_on_station
   puts "Введите имя станции для вывода информации о поездах на станции:"
   @name_for_search = gets.chomp.to_s
   station = search_obj(@stations)
-  block = proc { |train| puts "Поезд #{train.name} № #{train.number}, тип: #{train.type}, количество вагонов #{train.show_current_vagons}"}
+  block = proc { |each_train| puts "Поезд #{each_train.name} № #{each_train.number}, тип: #{each_train.type}, количество вагонов #{each_train.show_current_vagons}"}
   puts "На станции #{@stations[station].name} находятся поезда:"
   @stations[station].show_trains(&block)
 end
@@ -245,9 +245,9 @@ def vagons_train_information
   @name_for_search = gets.chomp.to_s
   train = search_obj(@trains)
   if @trains[train].type == "Cargo"
-    block = proc { |vagon| puts "Вагон № #{vagon.number}, тип: #{vagon.type}, занятый объем #{vagon.show_filling_vol}, свободный объем #{vagon.show_free_vol}"}
+    block = proc { |each_train| puts "Вагон № #{each_train.number}, тип: #{each_train.type}, занятый объем #{each_train.show_filling_vol}, свободный объем #{each_train.show_free_vol}"}
   else
-    block = proc { |vagon| puts "Вагон № #{vagon.number}, тип: #{vagon.type}, занятые места #{vagon.show_filling_vol}, свободные места #{vagon.show_free_vol}"}
+    block = proc { |each_train| puts "Вагон № #{each_train.number}, тип: #{each_train.type}, занятые места #{each_train.show_filling_vol}, свободные места #{each_train.show_free_vol}"}
   end
   puts "Список вагонов поезда #{@trains[train].name}:"
   @trains[train].all_vagons(&block)
