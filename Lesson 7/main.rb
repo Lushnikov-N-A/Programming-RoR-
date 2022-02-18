@@ -226,7 +226,7 @@ def filling_vagon
     @trains[train].vagons[num].filling(vol)
     puts "Объем #{vol} загружен."
   else
-    @trains[train].vagons[num].filling(1)
+    @trains[train].vagons[num].filling
     puts "Посадка пассажира выполнена."
   end
 end

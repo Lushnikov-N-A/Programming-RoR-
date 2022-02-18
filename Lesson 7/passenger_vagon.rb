@@ -8,4 +8,8 @@ class PassengerVagon < Vagon
     @number = 0
     @used_place = 0
   end
+
+  def filling
+      @used_place += 1
+  end
 end
