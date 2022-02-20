@@ -215,31 +215,19 @@ def change_vagons
 end
 
 def filling_vagon
-  begin
-    puts 'Введите имя поезда для выбора вагона или "Q" для выхода:'
-    @name_for_search = gets.chomp.to_s
-    if @name_for_search == "Q"
-      then return
-    end
-    train = search_obj(@trains)
-    puts "Введите номер вагона для заполнения:"
-    num = gets.chomp.to_i - 1
-    if @trains[train].type == "Cargo"
-      puts "Введите объем для загрузки вагона:"
-      vol = gets.chomp.to_i
-      @trains[train].vagons[num].filling(vol)
-      puts "Объем #{vol} загружен."
-    else
-      @trains[train].vagons[num].filling
-      puts "Посадка пассажира выполнена."
-    end
-    rescue
-      if @trains[train].type == "Cargo"
-        puts "Повторите ввод данных или выберите другой вагон, свободный объем вагона № #{num + 1} = #{@trains[train].vagons[num].free_place}"
-      else
-        puts "Повторите ввод данных или выберите другой вагон, свободных мест в вагоне № #{num + 1} = #{@trains[train].vagons[num].free_place}"
-      end
-      retry
+  puts "Введите имя поезда для выбора вагона:"
+  @name_for_search = gets.chomp.to_s
+  train = search_obj(@trains)
+  puts "Введите номер вагона для заполнения:"
+  num = gets.chomp.to_i - 1
+  if @trains[train].type == "Cargo"
+    puts "Введите объем для загрузки вагона:"
+    vol = gets.chomp.to_i
+    @trains[train].vagons[num].filling(vol)
+    puts "Объем #{vol} загружен."
+  else
+    @trains[train].vagons[num].filling
+    puts "Посадка пассажира выполнена."
   end
 end
 
@@ -257,9 +245,9 @@ def vagons_train_information
   @name_for_search = gets.chomp.to_s
   train = search_obj(@trains)
   if @trains[train].type == "Cargo"
-    block = proc { |each_vagon| puts "Вагон № #{each_vagon.number}, тип: #{each_vagon.type}, занятый объем #{each_vagon.used_place}, свободный объем #{each_vagon.free_place}"}
+    block = proc { |each_train| puts "Вагон № #{each_train.number}, тип: #{each_train.type}, занятый объем #{each_train.show_filling_vol}, свободный объем #{each_train.show_free_vol}"}
   else
-    block = proc { |each_vagon| puts "Вагон № #{each_vagon.number}, тип: #{each_vagon.type}, занятые места #{each_vagon.used_place}, свободные места #{each_vagon.free_place}"}
+    block = proc { |each_train| puts "Вагон № #{each_train.number}, тип: #{each_train.type}, занятые места #{each_train.show_filling_vol}, свободные места #{each_train.show_free_vol}"}
   end
   puts "Список вагонов поезда #{@trains[train].name}:"
   @trains[train].all_vagons(&block)
